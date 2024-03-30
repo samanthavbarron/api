@@ -1,0 +1,16 @@
+[build-system]
+requires = ["poetry>=1.1.0"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry]
+name = "api"
+version = "0.1.0"
+description = "Python Flask app implementing an API"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^2.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
