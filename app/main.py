@@ -104,6 +104,7 @@ def qr():
 if __name__ == '__main__':
     logging.basicConfig(filename="api.log", level=logging.DEBUG)
     logging.info("Starting app...")
+    logging.info(f"App config: {app_config}")
     app.run(
         host=app_config.host,
         port=app_config.port,
