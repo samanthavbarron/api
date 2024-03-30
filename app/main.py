@@ -1,23 +1,34 @@
+from functools import wraps
+
 from flask import Flask, jsonify, request
+import os
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return jsonify(message='Hello, World!')
+def get_key(key_env_name):
+    API_KEY = os.getenv(key_env_name)
+    if not API_KEY:
+        raise ValueError('API_KEY environment variable is not set')
+    return API_KEY
 
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    # Logic to retrieve data from database or other sources
-    data = {'key': 'value'}
-    return jsonify(data)
+def require_api_key(api_key_name: str = "main"):
+    def _require_api_key(fn):
+        @wraps(fn)
+        def decorated_function(*args, **kwargs):
+            KEY_DICT = {
+                "main": os.getenv("API_KEY"),
+            }
+            if request.headers.get('x-api-key') and request.headers.get('x-api-key') == KEY_DICT[api_key_name]:
+                return fn(*args, **kwargs)
+            else:
+                return jsonify(error="API key is missing or incorrect"), 403
+        return decorated_function
+    return _require_api_key
 
-@app.route('/api/data', methods=['POST'])
-def post_data():
-    # Logic to handle POST request data
+@app.route('/health', methods=['POST'])
+@require_api_key()
+def health():
     request_data = request.get_json()
-    # Logic to process the data and store it
-    # Return a response
     return jsonify(message='Data received and processed successfully')
 
 if __name__ == '__main__':
