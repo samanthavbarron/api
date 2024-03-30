@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
-poetry shell
+source .venv/bin/activate
 python -m flask app/main.py
 exit 1

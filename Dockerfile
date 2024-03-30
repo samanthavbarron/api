@@ -12,7 +12,7 @@ COPY . .
 # Install with poetry
 RUN python -m pip install --upgrade pip \
     && pip install poetry \
-    && poetry install --no-dev
+    && poetry install --no-dev --no-interaction
 
 # Expose the logs
 RUN ln -sf /dev/stdout /app/app.log
