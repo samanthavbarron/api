@@ -21,4 +21,4 @@ RUN ln -sf /dev/stdout /app/app.log
 EXPOSE 5000
 
 # Run the flask app
-CMD ["bash", "run.sh"]
+CMD ["poetry", "run", "flask", "-A", "app/main.py", "run"]
