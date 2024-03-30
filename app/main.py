@@ -4,7 +4,6 @@ from dataclasses import dataclass
 from functools import wraps
 import logging
 import os
-from typing import Optional
 
 from flask import Flask, jsonify, request, redirect
 
@@ -24,7 +23,7 @@ if port:
 
 app_config = AppConfig(
     host = host if host else "0.0.0.0",
-    port = port if port else 8000,
+    port = port if port else 5000,
     debug = False,
 )
 
