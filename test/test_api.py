@@ -26,6 +26,28 @@ class TestAPI(unittest.TestCase):
         data = json.loads(response.get_data(as_text=True))
         self.assertEqual(data['message'], 'Data received and processed successfully')
         self.assertEqual(response.status_code, 200)
+    
+    def test_qr_bad(self):
+        response = self.app.post('/qr', headers={'x-api-key': 'wrong_key'})
+        data = json.loads(response.get_data(as_text=True))
+        self.assertIn('error', data)
+    
+    def test_qr_good(self):
+        response = self.app.post('/qr', headers={'x-api-key': self.test_api_key}, json={'url': 'http://example.com'})
+        data = json.loads(response.get_data(as_text=True))
+        self.assertIn('message', data)
+        self.assertEqual(response.status_code, 200)
+    
+    def test_qr_redirect(self):
+        response = self.app.get('/qr')
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(
+            ".com",
+            response.location
+        )
+
+        response = self.app.post('/qr', headers={'x-api-key': self.test_api_key}, json={'url': 'http://new_url.com'})
+        self.assertIn('new_url.com', response.get_json()["new_url"])
 
 if __name__ == '__main__':
     unittest.main()
