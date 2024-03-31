@@ -11,11 +11,10 @@ COPY . .
 
 # Install with poetry
 RUN python -m pip install --upgrade pip \
-    && pip install poetry \
-    && poetry install --no-dev --no-interaction
+    && pip install --no-cache-dir .
 
 # Expose port 5000
 EXPOSE 5000
 
 # Run the flask app
-CMD ["poetry", "run", "python", "app/main.py"]
+CMD ["python", "app/main.py"]
