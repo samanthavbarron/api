@@ -18,4 +18,4 @@ RUN python -m pip install --upgrade pip \
 EXPOSE 5000
 
 # Run the flask app
-CMD ["poetry", "run", "flask", "-A", "app/main.py", "run"]
+CMD ["poetry", "run", "python", "app/main.py"]
