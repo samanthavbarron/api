@@ -11,7 +11,7 @@ COPY . .
 
 # Install with poetry
 RUN python -m pip install --upgrade pip \
-    && pip install .
+    && python -m pip install .
 
 # Expose port 5000
 EXPOSE 5000
