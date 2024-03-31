@@ -11,7 +11,8 @@ COPY . .
 
 # Install with poetry
 RUN python -m pip install --upgrade pip \
-    && pip install --no-cache-dir .
+    && pip install poetry \
+    && poetry install --no-dev --no-interaction
 
 # Expose port 5000
 EXPOSE 5000
