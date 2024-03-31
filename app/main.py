@@ -69,6 +69,7 @@ def require_api_key(api_key_name: str = "main"):
             if check_api_key(request, key_name=api_key_name):
                 return fn(*args, **kwargs)
             else:
+                logger.error("API key is missing or incorrect")
                 return jsonify(error="API key is missing or incorrect"), 403
         return decorated_function
     return _require_api_key
@@ -77,11 +78,13 @@ def require_api_key(api_key_name: str = "main"):
 @require_api_key()
 def health():
     request_data = request.get_json()
+    logger.info(f"Health check received with data: {request_data}")
     return jsonify(message='Data received and processed successfully')
 
 @app.route("/qr", methods=["GET", "POST"])
 def qr():
     if request.method == "GET":
+        logger.info(f"Redirecting to QR code URL: {qr_code.url}")
         return redirect(qr_code.url, code=302)
 
     elif request.method == "POST":
@@ -90,9 +93,11 @@ def qr():
 
         request_data = request.get_json()
         if "url" not in request_data:
+            logger.error("URL is missing")
             return jsonify(error="URL is missing"), 400
         else:
             qr_code.url = request_data["url"]
+            logger.info(f"URL updated to: {qr_code.url}")
             return jsonify(
                 message="URL updated successfully",
                 new_url=qr_code.url,
@@ -102,9 +107,10 @@ def qr():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(filename="api.log", level=logging.DEBUG)
-    logging.info("Starting app...")
-    logging.info(f"App config: {app_config}")
+    import sys
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    logger.info("Starting app...")
+    logger.info(f"App config: {app_config}")
     app.run(
         host=app_config.host,
         port=app_config.port,

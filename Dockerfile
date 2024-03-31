@@ -14,9 +14,6 @@ RUN python -m pip install --upgrade pip \
     && pip install poetry \
     && poetry install --no-dev --no-interaction
 
-# Expose the logs
-RUN ln -sf /dev/stdout /app/api.log
-
 # Expose port 5000
 EXPOSE 5000
 
