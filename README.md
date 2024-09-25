@@ -1,6 +1,6 @@
 # QR Code API
 
-This is the API for setting the redirect for my QR code tattoo.
+This is the API for setting the redirect for my QR code tattoo. Also see [the associated repo](https://github.com/samanthavbarron/qr-code/tree/main) for generating QR codes that make for good tattoos as well as [my blog post](https://samantha.wiki/projects/qr-code-tattoo/).
 
 ## Repo Structure
 
