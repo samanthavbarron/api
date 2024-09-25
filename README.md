@@ -1,4 +1,6 @@
-# API
+# QR Code API
+
+This is the API for setting the redirect for my QR code tattoo.
 
 ## Repo Structure
 
@@ -18,9 +20,3 @@ The following environment variables are required for the app to function:
 - `API_KEY`: The API key used for certain functionalities.
 - `API_HOST`: The host to use for the flask app.
 - `API_PORT`: The port to use for the flask app.
-
-## Functionalities
-
-The API implements several features:
-
-- `api.example.com/health`: A healthcheck that the app is running.
