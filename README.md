@@ -20,3 +20,4 @@ The following environment variables are required for the app to function:
 - `API_KEY`: The API key used for certain functionalities.
 - `API_HOST`: The host to use for the flask app.
 - `API_PORT`: The port to use for the flask app.
+- `API_QR_DEFAULT`: The default URL for the redirect on start.
