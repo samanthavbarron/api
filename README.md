@@ -21,3 +21,15 @@ The following environment variables are required for the app to function:
 - `API_HOST`: The host to use for the flask app.
 - `API_PORT`: The port to use for the flask app.
 - `API_QR_DEFAULT`: The default URL for the redirect on start.
+
+## Testing Framework
+
+The tests for this project use the `unittest` framework.
+
+## Running Tests
+
+To run the tests, use the following command:
+
+```sh
+python -m unittest discover
+```
