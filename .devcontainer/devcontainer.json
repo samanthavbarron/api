@@ -4,8 +4,7 @@
       "cpus": 2
     },
     "waitFor": "onCreateCommand",
-    "updateContentCommand": "pip install -e .",
-    "postCreateCommand": "",
+    "postStartCommand": "pip install -e .",
     "postAttachCommand": {
       "server": "flask --debug run"
     },
