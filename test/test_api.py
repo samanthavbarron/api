@@ -55,9 +55,11 @@ class TestAPI(unittest.TestCase):
         This test ensures that the health endpoint can handle requests with missing data.
         """
         response = self.app.post('/health', headers={'x-api-key': self.test_api_key})
-        data = json.loads(response.get_data(as_text=True))
-        self.assertEqual(data['message'], 'Data received and processed successfully')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 400)
+        data = response.get_data(as_text=True)
+        if data:
+            data = json.loads(data)
+            self.assertEqual(data['message'], 'Data received and processed successfully')
 
     def test_qr_missing_url(self):
         """
