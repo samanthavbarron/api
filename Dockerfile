@@ -1,7 +1,7 @@
 # Dockerfile to run the flask app
 
 # Use the official image as a parent image
-FROM python:3.10-slim
+FROM python:3.10.17-alpine
 
 # Set the working directory in the container
 WORKDIR /app
